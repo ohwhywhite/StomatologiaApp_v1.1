@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Stomatologia.Models.Visit>
+
+@{
+    ViewData["Title"] = "Wizyty";
+}
+
+<h1>Wizyty</h1>
+<p>
+    <a class="nav-link" asp-area="" asp-controller="Visit" asp-action="BookVisit">Umów wizytę</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dentist.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dentist.LastName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

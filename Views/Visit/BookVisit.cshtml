@@ -1,0 +1,37 @@
+@model VisitViewModel
+
+<form asp-action="BookVisit" method="post">
+    <div class="form-group">
+            <label asp-for="DentistId" class="control-label">Wybierz stomatologa:</label>
+            <select asp-for="DentistId" class="form-control">
+                @foreach (var stomatolog in ViewBag.AvailableStomatologists)
+                {
+                    <option value="@stomatolog.Id">@stomatolog.FirstName @stomatolog.LastName</option>
+                }
+            </select>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" type="datetime-local" class="form-control" />
+    </div>
+
+    <input type="submit" value="Umów wizytę" />
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script type="text/javascript">
+    window.onload = function () {
+        if ('@TempData["Message"]' != "") {
+            $.notify("@TempData["Message"]", { color: "#fff", background: "#20D67B" })
+        }
+        else if ('@TempData["ErrorMessage"]' != "") {
+            $.notify("@TempData["ErrorMessage"]", { color: "#fff", background: "#D44950" })
+        }
+    }
+</script>
